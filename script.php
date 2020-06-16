@@ -1,4 +1,5 @@
 <?php
+    session_start();
 
 $categories = [];
 $categories = [];
@@ -15,25 +16,25 @@ $age = $_POST['age'];
 
 if(empty($name))
 {
-    echo 'Preencha o nome completo!';
-    return;
+    $_SESSION['error-message'] = 'Preencha o nome completo!';
+    header('location: index.php');
 }
 
 if(strlen($name) < 3)
 {
-    echo 'O Nome deve conter pelo menos 5 caracteres!';
-    return;
+    $_SESSION['error-message'] = 'O Nome não pode conter menos de 3 caracteres!';
+    header('location: index.php');
 }
 
 if(strlen($name) > 20) {
-    echo 'Quantidade máxima de caracteress: 20';
-    return;
+    $_SESSION['error-message'] = 'Quantidade máxima de caracteres: 20!';
+    header('location: index.php');
 }
 
 if(!is_numeric($age))
 {
-    echo 'Informe um NÚMERO para a idade!';
-    return;
+    $_SESSION['error-message'] = 'Informe um NÚMERO para a idade!';
+    header('location: index.php');
 }
 
 
@@ -58,5 +59,3 @@ else
         echo "O Nadador " . $name . " compete na categoria Adulto";
     }
 }
-
-?>
